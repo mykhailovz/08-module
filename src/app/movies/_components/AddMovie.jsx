@@ -1,4 +1,5 @@
-import Modal from './Modal';
+'use client';
+import Modal from '../../../components/Modal';
 import MovieForm from './MovieForm';
 
 export default function AddMovie({onMovieAdd}) {

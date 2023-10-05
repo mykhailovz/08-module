@@ -1,6 +1,6 @@
 import { getMovies } from '../movies/actions';
 
-import MovieList from '../movies/_components/MovieList';
+import MovieListPage from './_components/MovieListPage';
 
 export default async function Movies() {
   const movies = await getMovies('all');
@@ -8,8 +8,7 @@ export default async function Movies() {
   console.log('movies', movies);
   return (
     <>
-      <div>List of movies</div>
-      <MovieList movies={movies} />
+      <MovieListPage />
     </>
   );
 }
