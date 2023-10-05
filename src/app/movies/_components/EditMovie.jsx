@@ -1,4 +1,4 @@
-import Modal from './Modal';
+import Modal from '../../../components/Modal';
 import MovieForm from './MovieForm';
 
 export default function EditMovie({movie, onMovieEdit}) {
