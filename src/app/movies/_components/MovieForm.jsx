@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { MovieFormSchema } from '../schemas/MovieForm';
+import { MovieFormSchema } from '../_schemas/MovieForm';
 
 export default function MovieForm({modalId, movie, headerText, onClose, processForm}) {
   const [genres, setGenre] = useState(['all', 'documentary', 'comedy', 'horror','crime']);

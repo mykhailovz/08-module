@@ -6,7 +6,6 @@ export async function getMovieById() {
 }
 
 export async function getMovies(genre, searchQuery, sortBy) {
-  setStatus('loading');
   const abortController = new AbortController();
 
   let path = 'movies';

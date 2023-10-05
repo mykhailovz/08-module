@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import MovieItem from './MovieItem';
 import EditMovie from './EditMovie';

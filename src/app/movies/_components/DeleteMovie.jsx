@@ -1,4 +1,4 @@
-import Modal from './Modal';
+import Modal from '../../../components/Modal';
 
 export default function DeleteMovie({movie, onMovieDelete}) {
   async function deleteMovie(movie) {

@@ -1,13 +1,10 @@
-import { Link, useSearchParams } from 'react-router-dom';
-
-import { defaultGenre } from '../lib/genre.js'
-import { sortByOptions } from '../lib/sortOptions.js';
+import { defaultGenre } from '../../../lib/genre'
+import { sortByOptions } from '../../../lib/sortOptions';
 
 export default function MovieItem({ movie, onEditSelect, onDeleteSelect }) {
-  const [params] = useSearchParams();
-  const query = params.get('query') ?? '';
-  const genre = params.get('genre') ?? defaultGenre;
-  const sortBy = params.get('sortBy') || sortByOptions["Release Date"];
+  const query = '';
+  const genre =  defaultGenre;
+  const sortBy = sortByOptions["Release Date"];
 
   function handleOnDelete() {
     onDeleteSelect(movie);
@@ -16,7 +13,6 @@ export default function MovieItem({ movie, onEditSelect, onDeleteSelect }) {
   function handleOnEdit() {
     onEditSelect(movie);
   }
-
 
   return (
     <div>
@@ -31,7 +27,7 @@ export default function MovieItem({ movie, onEditSelect, onDeleteSelect }) {
           </li>
         </ul>
       </details>
-      <Link to={`movies/${movie?.id}?query=${query}&genre=${genre}&sortBy=${sortBy}`}>
+      {/* <Link to={`movies/${movie?.id}?query=${query}&genre=${genre}&sortBy=${sortBy}`}> */}
         <div className="max-w-xs rounded overflow-hidden shadow-lg">
           <img className="w-9/12" src={movie.poster_path} alt={movie.title} />
           <div className="px-6 py-4">
@@ -44,7 +40,7 @@ export default function MovieItem({ movie, onEditSelect, onDeleteSelect }) {
             </div>
           </div>
         </div>
-      </Link>
+      {/* </Link> */}
     </div>
   );
 }
