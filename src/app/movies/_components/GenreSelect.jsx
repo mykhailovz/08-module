@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 function GenreSelect({genres, genre, onSelect}) {
   const [selectedGenre, setSelectedGenre] = useState(genre);
@@ -15,7 +16,9 @@ function GenreSelect({genres, genre, onSelect}) {
       {genres.map(g => {
         return (
           <li className={`${selectedGenre === g ? 'bg-gray-400' : ''}`} key={g} onClick={() => handleClick(g)}>
-            <a className='mr-4 md:mr-6 uppercase underline' href='#'>{g}</a>
+            <div className='mr-4 md:mr-6 uppercase underline'>
+              <Link href={`/movies?genre=${g}`}>{g}</Link>
+            </div>
           </li>
         )
       })}

@@ -10,7 +10,7 @@ import AddMovie from '../_components/AddMovie.jsx';
 import { defaultGenre, getGenres } from '../../../lib/genre';
 import { sortByOptions } from '../../../lib/sortOptions.js';
 
-export default function MovieListPage({movies}) {
+export default function MovieListPage({movies, searchParams}) {
   const query = '';
   const genre =  defaultGenre;
   const sortBy =  sortByOptions["Release Date"];
@@ -21,17 +21,14 @@ export default function MovieListPage({movies}) {
 
   function onSearch(searchQuery) {
     console.log('[you just searched movie] : ', searchQuery);
-    setSearchParams({ query: searchQuery })
   }
 
   function onGenreSelect(genre) {
     console.log('[you just select genre] : ', genre);
-    setSearchParams({ query, genre, sortBy });
   }
 
   function onSortBySelect(selectedSortBy) {
     console.log('[you select sortBy]: ', selectedSortBy);
-    setSearchParams({ query, genre, sortBy: sortByOptions[selectedSortBy] })
   }
 
   function handleAdd() {
@@ -47,7 +44,7 @@ export default function MovieListPage({movies}) {
       <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleAdd}> + Add Movie Modal</button>
       <SearchForm defaultSearchQuery={query} onSearch={onSearch} />
       <GenreSelect genres={genres} genre={genre} onSelect={onGenreSelect} />
-      <SortControl sortBy={sortBy} onSelect={onSortBySelect} />
+      <SortControl searchParams={searchParams} />
       <MovieCounter movies={movies} />
       <MovieList movies={movies} setMovies={setMovies} />
       <AddMovie onMovieAdd={onMovieAdd} />

@@ -5,7 +5,7 @@ export async function getMovieById() {
   return movie;
 }
 
-export async function getMovies(genre, searchQuery, sortBy) {
+export async function getMovies(genre, sortBy, searchQuery) {
   const abortController = new AbortController();
 
   let path = 'movies';
