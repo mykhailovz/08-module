@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-export default function SortControl({searchParams}) {
+export default function SortControl({ searchParams }) {
   const { genre, query } = searchParams;
 
   let href = '/movies'

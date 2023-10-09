@@ -1,6 +1,6 @@
 import Modal from '../../../components/Modal';
 
-export default function DeleteMovie({movie, onMovieDelete}) {
+export default function DeleteMovie({ movie, setOptimisticMovies }) {
   async function deleteMovie(movie) {
     const response = await fetch(`http://localhost:4000/movies/${movie?.id}`, {
       method: 'DELETE'
@@ -10,8 +10,11 @@ export default function DeleteMovie({movie, onMovieDelete}) {
   } 
 
   async function handleDelete() {
+    setOptimisticMovies({
+      actionType: 'delete',
+      movie
+    });
     await deleteMovie(movie);
-    onMovieDelete(movie);
     document.getElementById('delete-movie').close();
   }
 

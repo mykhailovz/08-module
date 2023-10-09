@@ -1,14 +1,14 @@
 'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-function SearchForm({defaultSearchQuery, onSearch}) {
-  const [query, setQuery] = useState(defaultSearchQuery);
+function SearchForm() {
+  const [query, setQuery] = useState();
   const router = useRouter();
 
   function handleClick(e) {
     e.preventDefault();
-    onSearch(query);
     router.push(`/movies?query=${query}`);
   }
   
