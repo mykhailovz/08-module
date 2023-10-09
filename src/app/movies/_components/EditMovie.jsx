@@ -32,8 +32,7 @@ export default function EditMovie({ movie, setOptimisticMovies }) {
       overview: formData.description,
       runtime: +formData.runtime,
     };
-  
-    debugger
+
     setOptimisticMovies({
       actionType: 'edit',
       movie: moviePayload
