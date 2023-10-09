@@ -3,12 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-function GenreSelect({genres, genre, onSelect}) {
+function GenreSelect({ genres, genre }) {
   const [selectedGenre, setSelectedGenre] = useState(genre);
 
   function handleClick(genre) {
     setSelectedGenre(genre);
-    onSelect(genre);
   }
 
   return (

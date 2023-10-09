@@ -1,6 +1,6 @@
 'use client';
 
-export default function MovieCounter({movies = []}) {
+export default function MovieCounter({ movies = [] }) {
   return (
     <>
       {

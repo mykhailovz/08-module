@@ -1,11 +1,7 @@
 import Modal from '../../../components/Modal';
 import MovieForm from './MovieForm';
 
-export default function EditMovie({movie, onMovieEdit}) {
-  function onSubmitEdit() {
-    console.log('on-submit-edit-movie');
-  }
-
+export default function EditMovie({ movie, setOptimisticMovies }) {
   function onClose() {
     document.getElementById('edit-movie').close();
   }
@@ -37,16 +33,20 @@ export default function EditMovie({movie, onMovieEdit}) {
       runtime: +formData.runtime,
     };
   
+    debugger
+    setOptimisticMovies({
+      actionType: 'edit',
+      movie: moviePayload
+    });
     const addedMovie = await editMovie(moviePayload);
     console.log('[edit-movie: ', addedMovie);
-    onMovieEdit(addedMovie);
     onClose();
   };
 
   return (
     <div>
       <Modal modalId="edit-movie">
-        <MovieForm modalId="edit-movie" headerText="Edit Movie" onClose={onClose} onSubmit={onSubmitEdit} movie={movie} processForm={processForm} />
+        <MovieForm modalId="edit-movie" headerText="Edit Movie" onClose={onClose} movie={movie} processForm={processForm} />
       </Modal>
     </div>
   );

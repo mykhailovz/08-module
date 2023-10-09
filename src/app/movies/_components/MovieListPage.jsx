@@ -1,5 +1,7 @@
 'use client';
 
+import { experimental_useOptimistic as useOptimistic } from 'react';
+
 import MovieList from '../_components/MovieList';
 import SearchForm from '../_components/SearchForm.jsx';
 import GenreSelect from '../_components/GenreSelect.jsx';
@@ -7,43 +9,43 @@ import SortControl from '../_components/SortControl.jsx';
 import MovieCounter from '../_components/MovieCounter.jsx';
 import AddMovie from '../_components/AddMovie.jsx';
 
-import { defaultGenre, getGenres } from '../../../lib/genre';
-import { sortByOptions } from '../../../lib/sortOptions.js';
+import {  getGenres } from '../../../lib/genre';
 
 export default function MovieListPage({movies, searchParams}) {
-  const query = '';
-  const genre =  defaultGenre;
-  const sortBy =  sortByOptions["Release Date"];
+  const [optimisticMovies, setOptimisticMovies] = useOptimistic(movies, (state, action) => {
+    const { actionType, movie } = action;
+    switch (actionType) {
+      case 'add':
+        return [movie, ...state];
+      case 'delete':
+        return state.filter(m => m.id !== movie.id);
+      case 'edit':
+        return state.map(m => m.id === movie.id ? movie : m);
+      default:
+        return state;
+    }
+  });
 
   const genres = getGenres();
-
-  function setMovies() {}
-
-  function onSearch(searchQuery) {
-    console.log('[you just searched movie] : ', searchQuery);
-  }
-
-  function onGenreSelect(genre) {
-    console.log('[you just select genre] : ', genre);
-  }
 
   function handleAdd() {
     document.getElementById('add-movie').showModal();
   }
 
-  function onMovieAdd(movie) {
-    setMovies([movie, ...movies]);
-  }
-
   return (
     <>
       <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleAdd}> + Add Movie Modal</button>
-      <SearchForm defaultSearchQuery={query} onSearch={onSearch} />
-      <GenreSelect genres={genres} genre={genre} onSelect={onGenreSelect} />
+      <SearchForm />
+      <GenreSelect genres={genres} genre={searchParams.genre} />
       <SortControl searchParams={searchParams} />
-      <MovieCounter movies={movies} />
-      <MovieList movies={movies} setMovies={setMovies} />
-      <AddMovie onMovieAdd={onMovieAdd} />
+      <MovieCounter movies={optimisticMovies} />
+      <MovieList
+        movies={optimisticMovies}
+        setOptimisticMovies={setOptimisticMovies}
+      />
+      <AddMovie
+        setOptimisticMovies={setOptimisticMovies}
+      />
     </>
 
   );

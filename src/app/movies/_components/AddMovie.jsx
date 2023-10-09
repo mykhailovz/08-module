@@ -4,7 +4,7 @@ import MovieForm from './MovieForm';
 
 import { addMovie } from '../actions';
 
-export default function AddMovie({onMovieAdd}) {
+export default function AddMovie({ setOptimisticMovies }) {
   function onSubmitAdd() {
     console.log('on-submit-add-movie');
   }
@@ -21,8 +21,11 @@ export default function AddMovie({onMovieAdd}) {
       runtime: +formData.runtime,
     };
 
-    const addedMovie = await addMovie(moviePayload);
-    onMovieAdd(addedMovie);
+    setOptimisticMovies({
+      actionType: 'add',
+      movie: moviePayload
+    });
+    await addMovie(moviePayload);
     onClose();
   }
 
