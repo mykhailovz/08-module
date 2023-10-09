@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function MovieDetails({movie, onClick}) {
   if (!movie) {
@@ -13,7 +13,7 @@ export default function MovieDetails({movie, onClick}) {
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" >{movie.vote_average}</h5>
         <h6>{movie.release_date} - {movie.runtime}</h6>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400" data-testid='movie-description'>{movie.overview}</p>
-        <Link to="/">
+        <Link href="/movies">
           <p>Search movies: <span onClick={onClick}>🔍</span></p>
         </Link>
       </div>
