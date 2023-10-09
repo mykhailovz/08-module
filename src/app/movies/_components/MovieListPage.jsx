@@ -27,10 +27,6 @@ export default function MovieListPage({movies, searchParams}) {
     console.log('[you just select genre] : ', genre);
   }
 
-  function onSortBySelect(selectedSortBy) {
-    console.log('[you select sortBy]: ', selectedSortBy);
-  }
-
   function handleAdd() {
     document.getElementById('add-movie').showModal();
   }
