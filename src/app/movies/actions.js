@@ -1,7 +1,7 @@
 import { revalidatePath } from 'next/cache';
 
-export async function getMovieById() {
-  const response = await fetch(`http://localhost:4000/movies/${movieId}`, {
+export async function getMovieById(id) {
+  const response = await fetch(`http://localhost:4000/movies/${id}`, {
     cache: 'no-store'
   });
   const movie = await response.json();
