@@ -1,5 +1,9 @@
+import { revalidatePath } from 'next/cache';
+
 export async function getMovieById() {
-  const response = await fetch(`http://localhost:4000/movies/${movieId}`);
+  const response = await fetch(`http://localhost:4000/movies/${movieId}`, {
+    cache: 'no-store'
+  });
   const movie = await response.json();
   
   return movie;
@@ -21,7 +25,8 @@ export async function getMovies(genre, sortBy, searchQuery) {
     const response = await fetch(
       `http://localhost:4000/${path}`,
       {
-        signal: abortController.signal
+        signal: abortController.signal,
+        cache: 'no-store'
       }
     );
     const moviesResponse = await response.json();
@@ -49,6 +54,8 @@ export async function editMovie(movie) {
   });
   const editedMovie = await response.json();
 
+  revalidatePath('/movies');
+
   return editedMovie;
 }
 
@@ -57,5 +64,20 @@ export async function deleteMovie(movie) {
     method: 'DELETE'
   });
 
+  revalidatePath('/movies');
+
   return response.status;
+}
+
+
+export async function addMovie(moviePayload) {
+  const response = await fetch(`http://localhost:4000/movies`, {
+    method: 'POST',
+    body: JSON.stringify(moviePayload),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  return response.json();
 }

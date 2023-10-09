@@ -2,6 +2,8 @@
 import Modal from '../../../components/Modal';
 import MovieForm from './MovieForm';
 
+import { addMovie } from '../actions';
+
 export default function AddMovie({onMovieAdd}) {
   function onSubmitAdd() {
     console.log('on-submit-add-movie');
@@ -9,18 +11,6 @@ export default function AddMovie({onMovieAdd}) {
 
   function onClose() {
     document.getElementById('add-movie').close();
-  }
-
-  async function addMovie(moviePayload) {
-    const response = await fetch(`http://localhost:4000/movies`, {
-      method: 'POST',
-      body: JSON.stringify(moviePayload),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    return response.json();
   }
 
   const processForm = async (formData) => {
